@@ -9,4 +9,5 @@ public interface ControladorGenerico<T, ID> {
     ResponseEntity<T> adicionar(T entity);
     ResponseEntity<T> buscarPorId(ID id);
     ResponseEntity<?> deletar(ID id);
+    ResponseEntity<T> atualizar(ID id, T entity );
 }

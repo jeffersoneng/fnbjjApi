@@ -3,7 +3,7 @@ package br.com.jcoder.fnbjjapi.modelos;
 import lombok.Data;
 
 import javax.persistence.*;
-
+import java.time.LocalDate;
 
 @Data
 @Entity
@@ -15,6 +15,9 @@ public class Atleta {
 
     @Column(unique = true, nullable = false)
     private String matricula;
+
+    @Column(nullable = false)
+    private LocalDate dataMatricula = LocalDate.now();
 
     @ManyToOne
     @JoinColumn(name = "academia_id", foreignKey = @ForeignKey(name = "fk_atleta_academia"))

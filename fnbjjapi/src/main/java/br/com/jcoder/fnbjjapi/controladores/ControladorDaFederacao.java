@@ -47,4 +47,23 @@ public class ControladorDaFederacao implements ControladorGenerico<Federacao, In
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
+    @Override
+    @PutMapping("/{id}")
+    public ResponseEntity<Federacao> atualizar(@PathVariable Integer id, @RequestBody @Valid Federacao entity) {
+        Optional<Federacao> federacao = this.servicoDaFederacao.buscarPorId(id);
+
+        if (federacao.isPresent()){
+            Federacao f = federacao.get();
+            f.setAtiva(entity.getAtiva());
+            f.setNome(entity.getNome());
+            f.setCnpj(entity.getCnpj());
+            f.setDataFundacao(entity.getDataFundacao());
+
+            final Federacao federacaoAtualizada = this.servicoDaFederacao.salvar(f);
+            return ResponseEntity.ok(federacaoAtualizada);
+        }else{
+            return ResponseEntity.notFound().build();
+        }
+    }
 }
